@@ -1,6 +1,6 @@
 services:
   app:
-    image: 'jc21/nginx-proxy-manager:2.12.2'
+    image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     pull_policy: always
     ports: 
