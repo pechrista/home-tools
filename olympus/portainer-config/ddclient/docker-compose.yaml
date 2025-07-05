@@ -1,0 +1,15 @@
+volumes:
+  data:
+
+services:
+  ddclient:
+    image: lscr.io/linuxserver/ddclient:latest
+    pull_policy: always
+    container_name: ddclient
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - data:/config
+    restart: unless-stopped
