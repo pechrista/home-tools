@@ -4,13 +4,12 @@ services:
     restart: unless-stopped
     pull_policy: always
     ports: 
-      - '80:80'
+      - '8080:80'
       - '81:81'
-      - '443:443'
+      - '8443:443'
     volumes:
       - data:/data
       - certs:/etc/letsencrypt
-    network_mode: "host"
     command: sleep 60
 
 volumes:
