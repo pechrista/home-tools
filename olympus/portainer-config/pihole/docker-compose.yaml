@@ -11,7 +11,9 @@ services:
     environment:
       TZ: 'America/New_York'
       WEBPASSWORD: ${WEBPASSWORD}
-      WEB_PORT: 8081
+      FTLCONF_webserver_port: "8081"
+      FTLCONF_webserver_https_port: "0"
+
 
     volumes:
       - pihole:/etc/pihole
