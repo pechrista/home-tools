@@ -8,11 +8,6 @@ services:
     image: pihole/pihole:latest
     pull_policy: always
     network_mode: host
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "8080:80/tcp"
     environment:
       TZ: 'America/New_York'
       WEBPASSWORD: ${WEBPASSWORD}
