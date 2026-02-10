@@ -11,6 +11,7 @@ services:
     environment:
       TZ: 'America/New_York'
       WEBPASSWORD: ${WEBPASSWORD}
+      WEB_PORT: 8081
 
     volumes:
       - pihole:/etc/pihole
