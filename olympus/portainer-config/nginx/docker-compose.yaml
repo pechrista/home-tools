@@ -11,6 +11,8 @@ services:
       - data:/data
       - certs:/etc/letsencrypt
     command: sleep 60
+    networks:
+      - proxy-tier
 
 networks:
   proxy-tier:
