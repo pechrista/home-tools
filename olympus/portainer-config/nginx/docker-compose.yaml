@@ -12,18 +12,15 @@ services:
       - data:/data
       - certs:/etc/letsencrypt
   golinks:
-    image: trotto/go-links
-    container_name: golinks
-    restart: unless-stopped
-    expose:
-      - "8000"
-    environment:
-      # This allows you to use it without a complicated login setup for home use
-      - ALLOW_NO_AUTH=true 
-    volumes:
-      - golinks_data:/data
-    networks:
-      - default
+      image: nicholaswilde/golinks:latest
+      container_name: golinks
+      restart: unless-stopped
+      expose:
+        - "8000"
+      volumes:
+        - golinks_data:/app/data
+      networks:
+        - default
 
 volumes:
   data:
