@@ -11,18 +11,7 @@ services:
     volumes:
       - data:/data
       - certs:/etc/letsencrypt
-  golinks:
-      image: ghcr.io/the-vane/golinks:latest
-      container_name: golinks
-      restart: unless-stopped
-      expose:
-        - "8000"
-      volumes:
-        - golinks_data:/app/data
-      networks:
-        - default
 
 volumes:
   data:
   certs:
-  golinks_data:
