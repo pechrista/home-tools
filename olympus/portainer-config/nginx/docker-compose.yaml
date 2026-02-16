@@ -1,7 +1,6 @@
-version: '3.8'
-
 services:
-  app:
+  # Nginx Proxy Manager
+  npm:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginx-proxy-manager
     restart: unless-stopped
@@ -10,21 +9,23 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - data:/data
-      - certs:/etc/letsencrypt
-
+      - npm_data:/data
+      - npm_certs:/etc/letsencrypt
   golinks:
-    image: prologic/golinks:latest
+    image: trotto/go-links
     container_name: golinks
     restart: unless-stopped
     expose:
-      - "8080"
-    volumes:
-      - golinks_data:/db
+      - "8000"
     environment:
-      - BIND=:8080
+      # This allows you to use it without a complicated login setup for home use
+      - ALLOW_NO_AUTH=true 
+    volumes:
+      - golinks_data:/data
+    networks:
+      - default
 
 volumes:
-  data:
-  certs:
+  npm_data:
+  npm_certs:
   golinks_data:
