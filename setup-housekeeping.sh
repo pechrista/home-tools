@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Setup script to add housekeeping tasks to crontab
-# Run with: curl -fsSL https://raw.githubusercontent.com/pechrista/home-tools/main/setup-housekeeping.sh | bash
+# Run with: curl -fsSL https://raw.githubusercontent.com/pechrista/home-tools/main/setup-housekeeping.sh | sudo bash
 # Or download and run: bash setup-housekeeping.sh
 #
 # This script will:
