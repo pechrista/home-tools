@@ -12,7 +12,7 @@ services:
       - data:/data
       - certs:/etc/letsencrypt
   golinks:
-      image: nicholaswilde/golinks:latest
+      image: ghcr.io/the-vane/golinks:latest
       container_name: golinks
       restart: unless-stopped
       expose:
