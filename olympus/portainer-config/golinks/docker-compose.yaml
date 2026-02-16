@@ -1,24 +1,19 @@
-version: '3.8'
+volumes:
+  data:
 
 services:
   golinks:
-    build: .
+    image: docker.io/pechristakos/golinks:latest
     container_name: golinks
     restart: unless-stopped
     ports:
       - "8080:8080"
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     environment:
       - DB_PATH=/data/links.db
       - LISTEN_ADDR=0.0.0.0:8080
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASS=${ADMIN_PASS:-changeme}
     volumes:
-      - ./data:/data
-    networks:
-      - golinks-network
-
-networks:
-  golinks-network:
-    driver: bridge
+      - data:/data

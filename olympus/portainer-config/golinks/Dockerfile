@@ -16,7 +16,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-s -w' -o golinks .
 FROM alpine:latest
 
 # Install runtime dependencies
-RUN apk --no-cache add ca-certificates
+RUN apk --no-cache add ca-certificates su-exec
 
 # Create non-root user
 RUN addgroup -g 1000 golinks && \
@@ -30,8 +30,12 @@ WORKDIR /app
 # Copy binary from builder
 COPY --from=builder /build/golinks .
 
+# Add entrypoint to prepare runtime (ensure /data exists and is writable)
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Switch to non-root user
-USER golinks
+USER root
 
 # Set default environment variables
 ENV DB_PATH=/data/links.db
@@ -39,4 +43,5 @@ ENV LISTEN_ADDR=0.0.0.0:8080
 
 EXPOSE 8080
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["./golinks"]
