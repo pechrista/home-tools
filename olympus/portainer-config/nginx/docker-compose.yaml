@@ -12,6 +12,11 @@ services:
       - certs:/etc/letsencrypt
     command: sleep 60
 
+networks:
+  proxy-tier:
+    name: proxy-tier  # This makes the network "discoverable" by other stacks
+    driver: bridge
+
 volumes:
   data:
   certs:
