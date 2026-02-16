@@ -1,6 +1,6 @@
 services:
   # Nginx Proxy Manager
-  npm:
+  nappm:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginx-proxy-manager
     restart: unless-stopped
@@ -9,8 +9,8 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - npm_data:/data
-      - npm_certs:/etc/letsencrypt
+      - data:/data
+      - certs:/etc/letsencrypt
   golinks:
     image: trotto/go-links
     container_name: golinks
@@ -26,6 +26,6 @@ services:
       - default
 
 volumes:
-  npm_data:
-  npm_certs:
+  data:
+  certs:
   golinks_data:
