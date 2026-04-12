@@ -13,6 +13,7 @@ services:
       WEBPASSWORD: ${WEBPASSWORD}
       FTLCONF_webserver_port: "8081"
       FTLCONF_webserver_https_port: "0"
+      FTLCONF_dns_listeningMode: "all  
 
 
     volumes:
