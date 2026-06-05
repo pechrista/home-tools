@@ -1,10 +1,11 @@
+# your minecraft server name
 name: minecraft-flint
 
 services:
   bedrock-vanilla:
-    build: .
+    image: docker.io/pechristakos/minecraft-bedrock:latest
     container_name: ${COMPOSE_PROJECT_NAME}
-    pull_policy: build
+    pull_policy: always
     restart: unless-stopped
     ports:
       - "19132:19132/udp"
@@ -19,8 +20,9 @@ services:
       - ./data:/bedrock
 
   bedrock-backup:
-    image: alpine:latest
+    image: docker.io/pechristakos/minecraft-bedrock-backup:latest
     container_name: ${COMPOSE_PROJECT_NAME}-backup
+    pull_policy: always
     restart: unless-stopped
     logging:
       driver: "json-file"
@@ -32,18 +34,7 @@ services:
       - ./backups:/backups
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro
-      - ./mc-backup.sh:/usr/local/bin/mc-backup.sh:ro
     environment:
       - TZ=America/New_York
       - BACKUP_CRON=0 4 * * *
       - MAX_BACKUPS=10
-    entrypoint: /bin/sh -c "
-      echo 'Installing dependencies...' &&
-      apk add --no-cache docker-cli tar jq &&
-      
-      echo 'Registering cron schedule...' &&
-      echo \"\$$BACKUP_CRON /usr/local/bin/mc-backup.sh\" > /etc/crontabs/root &&
-      
-      echo 'Starting backup daemon...' &&
-      exec crond -f -l 2
-      "

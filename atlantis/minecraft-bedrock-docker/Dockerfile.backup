@@ -1,0 +1,12 @@
+FROM alpine:3.20
+
+RUN apk add --no-cache docker-cli tar jq tzdata
+
+COPY mc-backup.sh /usr/local/bin/mc-backup.sh
+RUN chmod +x /usr/local/bin/mc-backup.sh
+
+ENV BACKUP_CRON="0 4 * * *"
+ENV MAX_BACKUPS=10
+ENV TZ=America/New_York
+
+ENTRYPOINT ["/bin/sh", "-c", "echo \"$BACKUP_CRON /usr/local/bin/mc-backup.sh\" > /etc/crontabs/root && exec crond -f -l 2"]

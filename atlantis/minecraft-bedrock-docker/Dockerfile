@@ -17,6 +17,7 @@ EXPOSE 19132/udp
 
 # Copy the startup script into the image
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Run it
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
