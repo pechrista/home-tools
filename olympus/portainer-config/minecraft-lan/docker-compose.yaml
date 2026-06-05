@@ -1,0 +1,12 @@
+name: mc-phantom-proxy
+
+services:
+  mc-phantom-proxy-flint: 
+    image: docker.io/pechristakos/minecraft-lan:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-flint
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      # You can use a standard subdomain or domain name here
+      - SERVER=flint.ctakos.com:19132
+      - BIND_IP=0.0.0.0
